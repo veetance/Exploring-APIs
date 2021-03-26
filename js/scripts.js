@@ -1,8 +1,8 @@
+var accessToken = "?access_token=tv9KFPyz0q7p8zNCnO4bGyCpkOVSPKbdUUVZ_CExf3VgfDnWVTbq7C_oslUsPfpo";
 var CLIENTID = "bakC8pUGqob1xs0TNSU0ioSUUJi7llMdgg3eNJqCX-OIL8uh6u9PebzwfzYQ7qS_";
 var CLIENTSECRET = "RlaEuibZVK7gOW8xSBYfhxc35Ev68dPAx2vt8StFaIlyLF3HIpc5xQwY1VfnitxLRox0OGbmODRU0MapAnZNyQ";
-var accessToken = "?access_token=tv9KFPyz0q7p8zNCnO4bGyCpkOVSPKbdUUVZ_CExf3VgfDnWVTbq7C_oslUsPfpo";
 var API = "https://api.genius.com/search";
-var APISong = "https://api.genius.com/songs/";
+var GAPISongs = "https://api.genius.com/songs/";
 var songID = "2471960";
 var maxSong = 2471960;
 //Max song is 489579 ;
@@ -19,7 +19,7 @@ var xhr = new XMLHttpRequest(); //XML HTTP Request
 xhr.onload = function() {
     
         if (xhr.status === 200 || xhr.status === 304) {
-            // Success! Do stuff with data.
+            // acces granted! Do stuff with data.
             //console.log(xhr.responseText); 
         }
     
@@ -27,7 +27,7 @@ xhr.onload = function() {
 
 
 
-xhr.open("GET", APISong + songID + accessToken, false);
+xhr.open("GET", GAPISongs + songID + accessToken, false);
 
 
 xhr.send();
@@ -42,13 +42,13 @@ var song = json['response']['song'];
 
 
 function randomSong() {
-    xhr.open("GET", APISong + songID + accessToken, false);
+    xhr.open("GET", GAPISongs + songID + accessToken, false);
     xhr.send();
     geniusData = xhr.response;
 
     while (xhr.status === 404) { //Checks if the Random Song Exists
         songID = getRandomInt(1, maxSong);
-        xhr.open("GET", APISong + songID + accessToken, false);
+        xhr.open("GET", GAPISongs + songID + accessToken, false);
         xhr.send();
         geniusData = xhr.response;
     }
